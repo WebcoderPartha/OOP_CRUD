@@ -33,5 +33,41 @@ class Database{
         }
     }
 
+    public function create($query){
+        $create = $this->link->query($query) or die($this->link->error.__LINE__);
+
+        if ($create){
+            header("Location: index.php?msg=".urlencode('Data created successfully.'));
+            exit();
+        }else{
+            die("Error: (".$this->errno.")".$this->link->error);
+        }
+    }
+
+    public function update($query){
+
+        $update = $this->link->query($query) or die($this->link->error.__LINE__);
+
+        if ($update){
+            header("Location: index.php?msg=".urldecode('Updated successfully.'));
+            exit();
+        }else{
+            die("Error: (".$this->errno.")".$this->link->error);
+        }
+
+    }
+
+    public function delete($query){
+
+        $delete = $this->link->query($query) or die($this->link->error.__LINE__);
+        if ($delete){
+            header("Location: index.php?msg=".urldecode('Data deleted successfully.'));
+            exit();
+        }else{
+            die("Error: (".$this->errno.")".$this->link->error);
+        }
+
+    }
+
 
 }
